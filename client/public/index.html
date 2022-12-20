@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="favicon.png">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+</head>
+<style scoped>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+     padding: 0;
+    margin:0;
+    box-sizing: border-box;
+
+  }
+
+  ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(165, 165, 165);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #07134a;
+
+}
+
+  :root {
+    --main-color: #f10016;
+    --alt-main-color: #07134a;
+    --main-transition: 0.9s;
+    --atl-white: #ddd;
+
+  }
+
+  body {
+    font-family: system-ui;
+    padding: 0px;
+    border: 0px;
+    width: 100%;
+    margin: 0px;
+  }
+
+  ul {
+    list-style: none;
+
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+
+
+</style>
+
+<body>
+
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
+</html>

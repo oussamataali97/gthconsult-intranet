@@ -1,0 +1,235 @@
+<template>
+  <div class="creationClient">
+
+    <h3>MODIFIÉ UNE INTERLOCUTEUR DE SOUS-TRAITANCE</h3>
+
+    <Traitement :msg="msgSousTraitance" v-if="traitement == true"/>
+
+    <p v-if="echec" :class="{ echec: echec }">
+        {{ error }}
+    </p>
+
+    <div class="formCreation">
+
+      <div>
+        <label for="Nom">Nom</label>
+        <input type="text" v-model="interlocuteur.nom">
+      </div>
+
+      <div>
+        <label for="Prenom">Prénom</label>
+        <input type="text" v-model="interlocuteur.prenom">
+      </div>
+
+      <div>
+        <label for="Fonction">Fonction</label>
+        <input type="text" v-model="interlocuteur.fonction">
+      </div>
+
+      <div>
+        <label for="Email">Email</label>
+        <input type="text" v-model="interlocuteur.email">
+      </div>
+
+
+      <div>
+        <label for="Téléphone">Téléphone</label>
+        <input type="text" v-model="interlocuteur.telephone">
+      </div>
+
+      <div>
+        <label for="Raison Sociale">Raison Sociale</label>
+        <select v-model="interlocuteur.raisonSocial">
+          <option v-for="index in sousTraitances" :key="index._id" :value="index"> {{ index.raisonSocial }}</option>
+        </select>
+      </div>
+
+
+      <div>
+        <input type="submit" value="Modifié une interlocuteur" @click="update()">
+      </div>
+
+      <div>
+        <input type="submit" value="Quitter" @click="quitter()">
+      </div>
+
+    </div>
+
+  </div>
+
+</template>
+
+<script>
+import Service from "../../../../Service";
+import Traitement from "../Affaire/Traitement.vue"
+
+export default {
+  data() {
+    return {
+      sousTraitances : [],
+      traitement : null,
+      msgSousTraitance : null,
+      interlocuteur: {
+              nom : null,
+              prenom : null,
+              email : null,
+              telephone : null,
+              fonction: null,
+              raisonSocial: null,
+      },
+      succes: false,
+      echec: false,
+      error : null
+    };
+  },
+
+  components : {
+    Traitement
+  },
+
+  props : {
+    interlocuteurSousTraitanceId : String
+  },
+
+  methods: {
+
+    quitter() {
+          return this.$router.go("/");
+    },
+
+    // create Client
+    update() {
+
+        this.traitement = true;
+        this.msgSousTraitance = "Veuillez patienter quelques secondes pour modifier";
+
+        Service.updateInterlocuteurSousTraitance(this.interlocuteur, this.interlocuteurSousTraitanceId)
+        .then(() => {
+            this.succes = true;
+            setTimeout(() => {
+                this.succes = false;
+                return this.$router.go(this.$router.currentRoute)
+            }, 5000);
+
+        })
+        .catch((error) => {
+            this.error = error.message;
+            console.error(`HTTP error: ${error.name} => ${error.message}`);
+            throw "fail request at: GET /refreshtime";
+        });
+    }
+
+  },
+
+  created() {
+
+
+      Service.selectInterlocuteurSousTraitance(this.interlocuteurSousTraitanceId)
+      .then((response) => {
+        this.interlocuteur = response.data.interlocuteurSousTraitance;
+      })
+      .catch((error) => {
+          this.error = error.message;
+          console.error(`HTTP error: ${error.name} => ${error.message}`);
+          throw "fail request at: GET /refreshtime";
+      });
+
+
+
+
+      Service.readSousTraitance()
+      .then((response) => {
+        this.sousTraitances = response.data.sousTraitances;
+      })
+      .catch((error) => {
+          this.error = error.message;
+          console.error(`HTTP error: ${error.name} => ${error.message}`);
+          throw "fail request at: GET /refreshtime";
+      });
+
+  }
+
+};
+</script>
+
+<style scoped>
+.creationClient {
+  width: 100%;
+  padding:5px;
+}
+.creationClient h3 {
+  width: 100%;
+  margin:auto;
+  color: white;
+  background: linear-gradient(346deg, rgba(207,31,33,1) 0%, rgba(24,86,161,1) 100%);    text-align: center;
+  text-align: center;
+  padding:15px;
+}
+.succes {
+  background-color: #69cd5b;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  height: fit-content;
+}
+.echec {
+  background-color: RED;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  height: fit-content;
+}
+.formCreation {
+  padding:20px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.formCreation div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 48%;
+}
+.formCreation div label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  color :#494949;
+}
+.formCreation div input {
+  height: 40px;
+  margin-bottom: 5px;
+  border: 1px solid #243064;
+  padding:5px;
+}.formCreation div input:focus-within {
+  outline: 1px solid #cf1f21 ;
+  border:0;
+}
+.formCreation div select {
+  height: 40px;
+}
+
+#app > div > div > div.menu-content > div.content > div > div > div > div:nth-child(8) > input[type=submit] {
+
+    background-color: red;
+    color: white;
+    border: 0;
+    margin-top: 50px;
+    cursor: pointer;
+}
+#app > div > div > div.menu-content > div.content > div > div > div > div:nth-child(7) > input[type=submit] {
+    background-color: green;
+    color: white;
+    border: 0;
+    margin-top: 50px;
+    cursor: pointer;
+}
+
+
+
+
+
+</style>

@@ -1,0 +1,42 @@
+{
+  "name": "service",
+  "version": "1.0.0",
+  "description": "Localhost DBMS GTHCONSULT",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon main.js"
+  },
+  "author": "Xone46 (Achraf AIT LHAJ LAHCEN)",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^ 2.1145.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "cross-fetch": "^3.1.5",
+    "docxtemplater": "^3.31.0",
+    "dotenv": "^16.0.0",
+    "exceljs": "^4.3.0",
+    "express": "^4.17.3",
+    "fs": "0.0.1-security",
+    "googleapis": "^100.0.0",
+    "handlebars": "^4.7.7",
+    "http": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.2",
+    "mongoose": "^6.2.10",
+    "multer": "^1.4.4",
+    "multer-s3": "^2.10.0",
+    "nodemailer": "^6.7.3",
+    "path": "^0.12.7",
+    "pdf-lib": "^1.17.1",
+    "pizzip": "^3.1.1",
+    "socket.io": "^4.5.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}

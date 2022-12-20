@@ -1,0 +1,18 @@
+module.exports = {
+    PORT: process.env.PORT || 3000,
+    DB_HOST:  process.env.DB_HOST,
+    DB_NAME: process.env.DB_NAME,
+    DB_PASSWORD: process.env.DB_PASSWORD,
+    DB_USER: process.env.DB_USER,
+    JWT_SECRET : process.env.JWT_SECRET,
+    NODE_ENV : process.env.NODE_ENV,
+    EMAIL : process.env.EMAIL,
+    PASSWORD : Buffer.from(process.env.PASSWORD, "base64").toString(),
+    DO_SPACES_ENDPOINT : process.env.DO_SPACES_ENDPOINT,
+    DO_SPACES_KEY : process.env.DO_SPACES_KEY,
+    DO_SPACES_SECRET : process.env.DO_SPACES_SECRET,
+    DO_SPACES_NAME : process.env.DO_SPACES_NAME,
+    CLIENT_ID : process.env.CLIENT_ID,
+    SECRET_ID : process.env.SECRET_ID,
+    REFRESH_TOKEN : process.env.REFRESH_TOKEN,
+}
